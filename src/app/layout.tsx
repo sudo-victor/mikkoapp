@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rubik.variable} ${redHatDisplay.variable} antialiased`}
+        className={`${rubik.variable} ${redHatDisplay.variable} antialiased h-[100vh]`}
       >
         {children}
       </body>

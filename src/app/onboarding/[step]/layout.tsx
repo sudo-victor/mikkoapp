@@ -27,7 +27,7 @@ export default async function OnboardingLayout({ children, params }: LayoutProps
         <div className={`h-full bg-secondary`} style={{ width: `${progressWidth}%` }} />
       </div>
 
-      <div className="px-6 pt-12">
+      <div className="h-full px-6 py-12 flex flex-col max-w-[600px] mx-auto">
         <header className="flex flex-col gap-5">
           <Image src="/logo.svg" alt="Mikkoapp logo" width={85} height={23} />
           <div className="flex flex-col gap-2">
@@ -43,7 +43,7 @@ export default async function OnboardingLayout({ children, params }: LayoutProps
           </div>
         </header>
 
-        <main>
+        <main className="h-full overflow-y-auto">
           {children}
         </main>
       </div>
