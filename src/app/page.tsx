@@ -1,101 +1,91 @@
 import Image from "next/image";
+import { FiSearch } from "react-icons/fi";
+import { HiLightningBolt } from "react-icons/hi";
+import { PiStrategy } from "react-icons/pi";
+import { TbTargetArrow } from "react-icons/tb";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <div className="py-6 bg-gradient-to-br from-[#FBB394] via-white to-[#FBB394]">
+        <header className="w-full pb-6 flex items-center justify-center">
+          <Image src="/logo.svg" alt="Mikkoapp logo" width={85} height={23} />
+        </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <main className="px-5 flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center justify-center gap-1  text-secondary">
+              <HiLightningBolt />
+              <p className="font-red-hat text-[10px]">Recomendado +500 vezes pela minha mãezinha querida</p>
+            </div>
+
+            <div className="flex flex-col items-center text-2xl font-semibold ">
+              <h1 className="text-center font-rubik">
+                Retome o controle financeiro com pouquíssimo esforço {" "}
+              </h1>
+
+              <div className="relative w-fit">
+                <div className="w-[110%] h-[110%] absolute bg-[#FB9366] z-0 -rotate-6 -left-[5px]"></div>
+                <p className="relative z-10 font-rubik">
+                  (mesmo)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-[#202020] text-xs font-red-hat text-center">
+            Gerenciar planilhas gigantes? Aprender sobre finanças do zero? Tudo isso parece dar muito trabalho, não é? Toca pro Mikko que ele cuida disso tudo pra você.
+          </p>
+
+          <div className="w-full p-1 flex gap-2 items-center rounded-lg border border-neutral-200 bg-white">
+            <input type="email" placeholder="Seu melhor e-mail" className="p-3 flex-grow text-[10px] font-red-hat" />
+            <button className="bg-primary hover:brightness-90 font-rubik px-[22px] py-[10px] rounded-lg text-[10px] font-semibold whitespace-nowrap transition">
+              Testar grátis
+            </button>
+          </div>
+        </main>
+      </div>
+
+      <section className="w-full px-7 py-11 flex flex-col gap-5">
+        <h2 className="text-xl text-dark font-rubik font-semibold">
+          Mikko tá aí pra <strong className="text-secondary font-semibold">descomplicar</strong> suas finanças
+        </h2>
+
+        <div className="grid gap-[6px]">
+          <article className="p-3 rounded-lg border border-neutral-200 flex gap-4">
+            <div className="w-7 h-7 flex items-center justify-center rounded-full border border-neutral-200">
+              <TbTargetArrow size={14} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xs font-semibold font-red-hat">Fale sobre sua meta financeira</h3>
+              <p className="text-xs font-red-hat">Descreva onde você quer chegar financeiramente.</p>
+            </div>
+          </article>
+          <article className="p-3 rounded-lg border border-neutral-200 flex gap-4">
+            <div className="w-7 h-7 flex items-center justify-center rounded-full border border-neutral-200">
+              <FiSearch size={14} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xs font-semibold font-red-hat">O Mikko analisa seus gastos</h3>
+              <p className="text-xs font-red-hat">É feita uma breve análise sobre seu perfil financeiro.</p>
+            </div>
+          </article>
+          <article className="p-3 rounded-lg border border-neutral-200 flex gap-4">
+            <div className="w-7 h-7 flex items-center justify-center rounded-full border border-neutral-200">
+              <PiStrategy size={14} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xs font-semibold font-red-hat">No final, tenha um planejamento completo</h3>
+              <p className="text-xs font-red-hat">Alinhamos seu objetivo e seu perfil em um planejamento completamente personalizado.</p>
+            </div>
+          </article>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+
+        <button className="bg-primary hover:brightness-90 font-rubik px-[22px] py-[10px] rounded-lg text-xs font-semibold whitespace-nowrap transition">
+          Quero organizar minhas finanças
+        </button>
+      </section>
+    </>
   );
 }
