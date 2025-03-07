@@ -1,9 +1,11 @@
-import { CardInfo } from "@/components/landing-page/card-info";
 import Image from "next/image";
+import Link from 'next/link';
 import { FiSearch } from "react-icons/fi";
 import { HiLightningBolt } from "react-icons/hi";
 import { PiStrategy } from "react-icons/pi";
 import { TbTargetArrow } from "react-icons/tb";
+
+import { CardInfo } from "@/components/landing-page/card-info";
 
 export default function Home() {
   return (
@@ -40,9 +42,13 @@ export default function Home() {
 
           <div className="w-full p-1 flex gap-2 items-center rounded-lg border border-neutral-200 bg-white">
             <input type="email" placeholder="Seu melhor e-mail" className="p-3 flex-grow text-[10px] font-red-hat" />
-            <button className="bg-primary hover:brightness-90 font-rubik px-[22px] py-[10px] rounded-lg text-[10px] font-semibold whitespace-nowrap transition">
-              Testar grátis
-            </button>
+            <Link href="/onboarding/financial-goal">
+              <button 
+                className="bg-primary hover:brightness-90 font-rubik px-[22px] py-[10px] rounded-lg text-[10px] font-semibold whitespace-nowrap transition"
+              >
+                Testar grátis
+              </button>
+            </Link>
           </div>
         </main>
       </div>
