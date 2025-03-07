@@ -1,17 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import clsx from "clsx";
+import Link from "next/link";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
-import { MdOutlineCheck } from "react-icons/md";
 import { NumericFormat } from 'react-number-format';
 
 import { Button } from "@/app/components/ui/button";
 
 import { financialStatusOptions } from "./constants";
-import Link from "next/link";
+import { RadioCard } from "../radio-card";
 
 const schema = z.object({
   detailsIncome: z.string().min(1, "Detalhes são obrigatórios"),
@@ -115,32 +114,12 @@ export const FinancialStatus = () => {
           Quanto enforço você quer colocar no seu objetivo?
         </p>
         {financialStatusOptions.map((option) => (
-          <div
+          <RadioCard
             key={option}
-            className={clsx(
-              "p-4 flex flex-col rounded-xl border transition-all",
-              {
-                "border-neutral-200 bg-white": selectedOption !== option,
-                "border-secondary bg-[#FDEEE7] gap-3": selectedOption === option,
-              }
-            )}
-          >
-            <div
-              className="flex items-center gap-2"
-              onClick={() => setSelectedOption(state => state === option ? null : option)}
-            >
-              <div className={clsx(
-                "w-[14px] h-[14px] flex items-center justify-center rounded-full border",
-                {
-                  "border-neutral-200 bg-white": selectedOption !== option,
-                  "border-secondary bg-secondary": selectedOption === option,
-                }
-              )}>
-                <MdOutlineCheck className="text-white" size={8} />
-              </div>
-              <p className="text-xs">{option}</p>
-            </div>
-          </div>
+            value={option}
+            isSelected={selectedOption === option}
+            onSelect={() => setSelectedOption(state => state === option ? null : option)}
+          />
         ))}
       </div>
 
