@@ -11,9 +11,12 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			primary: '#FED11D',
-  			secondary: '#DD551B',
+  			primary: '#DD551B',
+  			secondary: '#FED11D',
   			dark: '#131210',
+				hot: '#F53A22',
+				secondaryFg: '#4D1400',
+				lightRed: '#FDEEE7',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

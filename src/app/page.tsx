@@ -5,20 +5,20 @@ import { HiLightningBolt } from "react-icons/hi";
 import { PiStrategy } from "react-icons/pi";
 import { TbTargetArrow } from "react-icons/tb";
 
-import { Button } from "@/app/components/ui/button";
-import { CardInfo } from "@/app/components/landing-page/card-info";
+import { Button } from "@/components/ui/button";
+import { CardInfo } from "@/components/landing-page/card-info";
 
 export default function Home() {
   return (
     <>
       <div className="py-6 bg-gradient-to-bl from-[#FBB394] via-white to-[#FBB394]">
         <header className="w-full pb-6 flex items-center justify-center">
-          <Image src="/logo.svg" alt="Mikkoapp logo" width={85} height={23} />
+          <Image src="/logo-dark.png" alt="Mikkoapp logo" width={85} height={23} />
         </header>
 
         <main className="px-5 flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <div className="flex items-center justify-center gap-1  text-secondary">
+            <div className="flex items-center justify-center gap-1  text-primary">
               <HiLightningBolt />
               <p className="font-red-hat text-[10px]">Recomendado +500 vezes pela minha mãezinha querida</p>
             </div>
@@ -45,7 +45,7 @@ export default function Home() {
             <input type="email" placeholder="Seu melhor e-mail" className="p-3 flex-grow text-[10px] font-red-hat" />
             <Link href="/onboarding/financial-goal">
               <button
-                className="bg-primary hover:brightness-90 font-rubik px-[22px] py-[10px] rounded-lg text-[10px] font-semibold whitespace-nowrap transition"
+                className="bg-secondary hover:brightness-90 font-rubik px-[22px] py-[10px] rounded-lg text-[10px] font-semibold whitespace-nowrap transition"
               >
                 Testar grátis
               </button>
@@ -56,7 +56,7 @@ export default function Home() {
 
       <section className="w-full px-7 py-11 flex flex-col gap-5">
         <h2 className="text-xl text-dark font-rubik font-semibold">
-          Mikko tá aí pra <strong className="text-secondary font-semibold">descomplicar</strong> suas finanças
+          Mikko tá aí pra <strong className="text-primary font-semibold">descomplicar</strong> suas finanças
         </h2>
 
         <div className="grid gap-[6px]">

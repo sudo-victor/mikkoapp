@@ -1,11 +1,54 @@
+export type TransactionCategory = 
+  | 'Dívidas'
+  | 'Cartão de Crédito'
+  | 'Empréstimos'
+  | 'Financiamentos'
+  | 'Investimentos'
+  | 'Poupança'
+  | 'Renda Fixa'
+  | 'Restaurantes'
+  | 'Mercado'
+  | 'Saúde'
+  | 'Educação'
+  | 'Serviços'
+  | 'Moradia'
+  | 'Vestuário'
+  | 'Assinaturas'
+  | 'Utilidades'
+  | 'Presentes'
+  | 'Outros'
+  | 'Transporte'
+  | 'Lazer'
+
 export const transactionTypes = ['Despesa Fixa', 'Despesa Variável', 'Receita Fixa', 'Receita Variável', 'Parcelamento']
-export const transactionCategories = ['Dívidas', 'Cartão de Crédito', 'Empréstimos', 'Financiamentos', 'Investimentos', 'Poupança', 'Renda Fixa']
+export const transactionCategories: TransactionCategory[] = [
+  'Dívidas',
+  'Cartão de Crédito',
+  'Empréstimos',
+  'Financiamentos',
+  'Investimentos',
+  'Poupança',
+  'Renda Fixa',
+  'Restaurantes',
+  'Mercado',
+  'Saúde',
+  'Educação',
+  'Serviços',
+  'Moradia',
+  'Vestuário',
+  'Assinaturas',
+  'Utilidades',
+  'Presentes',
+  'Outros',
+  'Transporte',
+  'Lazer'
+]
 
 export type Transaction = {
-  id: string
+  transactionId: string
   title: string
   createdAt: Date | string
   value: number
-  category: string
+  category: TransactionCategory
   type: string
 }

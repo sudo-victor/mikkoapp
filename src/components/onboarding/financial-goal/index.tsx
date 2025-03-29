@@ -1,16 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import clsx from "clsx";
 import { z } from 'zod';
 import { MdOutlineCheck } from "react-icons/md";
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { NumericFormat } from "react-number-format";
 
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 import { financialGoalOptions } from "./constants";
-import { NumericFormat } from "react-number-format";
 
 const schema = z.object({
   details: z.string().min(1, "Detalhes são obrigatórios"),
@@ -25,14 +25,94 @@ export const FinancialGoal = () => {
 
   const router = useRouter()
 
-  const { control, handleSubmit, formState: { isValid } } = useForm<FormData>({
+  const { control, handleSubmit, formState: { isValid, isSubmitting }, setValue } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data)
-    router.push('/onboarding/financial-status');
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const email = queryParams.get('email');
+
+    if (email) {
+      localStorage.setItem('email', email);
+    }
+  }, []);
+
+  const fetchFinancialDetails = async () => {
+    const email = localStorage.getItem('email');
+    const cachedData = localStorage.getItem(`financialDetails_${email}`);
+
+    if (cachedData) {
+      return { data: JSON.parse(cachedData) };
+    }
+
+    const response = await fetch(`http://localhost:3333/onboarding/details?email=${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch financial details');
+    }
+
+    const data = await response.json();
+
+    localStorage.setItem(`financialDetails_${email}`, JSON.stringify(data.data));
+
+    return data;
+  };
+
+  const fetchOnboardingData = async () => {
+    try {
+      const json = await fetchFinancialDetails();
+      setSelectedOption(json.data?.goalCategory ?? null)
+      setValue('details', json.data.details ?? '')
+      setValue('goalAmount', json.data.goalAmount ?? '')
+      setValue('months', json.data.months ?? '')
+    } catch (error) {
+      console.error('Error getting financial goal:', error);
+    }
+  }
+
+  useEffect(() => {
+    (async () => {
+      fetchOnboardingData()
+    })()
+  }, []);
+
+  const onSubmit = async (data: FormData) => {
+    const payload = {
+      ...data,
+      goalCategory: selectedOption,
+      email: localStorage.getItem('email'),
+    };
+
+    try {
+      const financialDetailsFromStorage = localStorage.getItem(`financialDetails_${payload.email}`)
+      const alreadyPersisted = financialDetailsFromStorage ? JSON.parse(financialDetailsFromStorage) : {}
+
+      const response = await fetch('http://localhost:3333/onboarding/start', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save financial goal');
+      }
+      const result = await response.json()
+      const updatedData = { ...alreadyPersisted, ...result.data };
+      localStorage.setItem(`financialDetails_${payload.email}`, JSON.stringify(updatedData));
+
+      router.push('/onboarding/financial-status');
+    } catch (error) {
+      console.error('Error submitting financial goal:', error);
+    }
   };
 
   return (
@@ -45,7 +125,7 @@ export const FinancialGoal = () => {
               "p-4 flex flex-col rounded-xl border transition-all",
               {
                 "border-neutral-200 bg-white": selectedOption !== option,
-                "border-secondary bg-[#FDEEE7]": selectedOption === option,
+                "border-primary bg-[#FDEEE7]": selectedOption === option,
               }
             )}
           >
@@ -57,12 +137,12 @@ export const FinancialGoal = () => {
                 "w-[14px] h-[14px] flex items-center justify-center rounded-full border",
                 {
                   "border-neutral-200 bg-white": selectedOption !== option,
-                  "border-secondary bg-secondary": selectedOption === option,
+                  "border-primary bg-primary": selectedOption === option,
                 }
               )}>
                 <MdOutlineCheck className="text-white" size={8} />
               </div>
-              <p className="text-xs">{option}</p>
+              <p className="md:text-sm text-xs">{option}</p>
             </div>
 
             <div className={clsx(
@@ -73,7 +153,7 @@ export const FinancialGoal = () => {
               }
             )}>
               <fieldset className="flex flex-col gap-2">
-                <label className="text-secondary text-xs font-medium">
+                <label className="text-primary md:text-sm text-xs font-medium">
                   Dê detalhes sobre seu objetivo financeiro pessoal.
                 </label>
                 <Controller
@@ -83,13 +163,13 @@ export const FinancialGoal = () => {
                     <textarea
                       {...field}
                       placeholder="Digite aqui."
-                      className="p-4 text-xs rounded-lg outline-secondary"
+                      className="p-4 text-xs rounded-lg outline-primary"
                     />
                   )}
                 />
               </fieldset>
               <fieldset className="flex flex-col gap-2">
-                <label className="text-secondary text-xs font-medium">
+                <label className="text-primary md:text-sm text-xs font-medium">
                   Quanto você precisa pra alcançar seu objetivo?
                 </label>
                 <Controller
@@ -102,7 +182,7 @@ export const FinancialGoal = () => {
                       decimalSeparator=","
                       prefix="R$ "
                       placeholder="R$ 12.000,00"
-                      className="p-4 text-xs rounded-lg border border-neutral-200 outline-secondary"
+                      className="p-4 text-xs rounded-lg border border-neutral-200 outline-primary"
                       onValueChange={(values) => {
                         const { value } = values;
                         field.onChange(value);
@@ -112,7 +192,7 @@ export const FinancialGoal = () => {
                 />
               </fieldset>
               <fieldset className="flex flex-col gap-2">
-                <label className="text-secondary text-xs font-medium">
+                <label className="text-primary md:text-sm text-xs font-medium">
                   Em quantos meses?
                 </label>
                 <Controller
@@ -124,7 +204,7 @@ export const FinancialGoal = () => {
                       type="number"
                       min={1}
                       placeholder="12"
-                      className="p-4 text-xs rounded-lg outline-secondary"
+                      className="p-4 text-xs rounded-lg outline-primary"
                     />
                   )}
                 />
@@ -134,7 +214,11 @@ export const FinancialGoal = () => {
         ))}
       </div>
 
-      <Button onClick={handleSubmit(onSubmit)} disabled={!isValid}>
+      <Button
+        onClick={handleSubmit(onSubmit)}
+        disabled={!isValid && !selectedOption}
+        isLoading={isSubmitting}
+      >
         Próximo
       </Button>
     </form>
