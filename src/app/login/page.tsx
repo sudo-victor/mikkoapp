@@ -11,7 +11,10 @@ export default function Login() {
   }
 
   return (
-    <main className="w-full h-full bg-primary flex items-center justify-center">
+    <main className="w-full h-full flex items-center justify-center" style={{
+      background: "rgb(254,209,29)",
+      backgroundImage: "radial-gradient(circle, rgba(254,209,29,1) 0%, rgba(221,85,27,1) 79%, rgba(221,85,27,1) 100%)"
+    }}>
       <div className="absolute left-0 top-0">
         <Image src="/mikko-tail-2.svg" alt="Mikko" height={367} width={175} />
       </div>

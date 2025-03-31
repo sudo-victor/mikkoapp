@@ -3,24 +3,27 @@ import clsx from "clsx"
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
+  labelBg?: string
   className?: string
 }
 
 export const Input: React.FC<Props> = ({
   label,
+  labelBg = "bg-white",
   className,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <div className="relative w-full p-4 border border-[#D0D0D0] rounded-lg">
+    <div className="relative w-full p-3 border border-[#D0D0D0] rounded-lg">
       <label 
         className={clsx(
           "absolute font-red-hat text-neutral-400 transition-all duration-200",
+          labelBg,
           (isFocused || props.value) 
-            ? "-top-3 left-1 text-xs bg-white px-1" 
-            : "top-4 left-4 text-sm"
+            ? "-top-3 left-1 text-xs px-1" 
+            : "top-3 left-4 text-sm"
         )}
       >
         {label}
