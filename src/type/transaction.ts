@@ -45,10 +45,10 @@ export const transactionCategories: TransactionCategory[] = [
 ]
 
 export type Transaction = {
-  transactionId: string
+  id: string
   title: string
   createdAt: Date | string
   value: number
-  category: TransactionCategory
+  category: string
   type: string
 }

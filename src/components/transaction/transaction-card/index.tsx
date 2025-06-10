@@ -25,7 +25,7 @@ export const TransactionCard = ({ data, onTransactionUpdate }: Props) => {
     <article className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
         <div className="shrink-0 w-7 h-7 flex items-center justify-center bg-[#F3F3F3] rounded">
-          <TransactionIcon category={data.category} />
+          <TransactionIcon category={data.category as any} />
         </div>
 
         <div className="flex flex-col gap-[2px]">

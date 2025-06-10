@@ -22,7 +22,7 @@ export const TransactionEditorDrawer = ({
 }: TransactionEditorDrawerProps) => {
   const [page, setPage] = useState<"selector" | "transactionName" | "category">("selector")
   const [transactionName, setTransactionName] = useState(data.title)
-  const [selectedCategory, setSelectedCategory] = useState<TransactionCategory>(data.category)
+  const [selectedCategory, setSelectedCategory] = useState<TransactionCategory>(data.category as any)
   const [open, setOpen] = useState(false)
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -13,7 +13,7 @@ export const CountUp = ({
   onStart,
   onEnd,
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const motionValue = useMotionValue(direction === "down" ? to : from);
 
   // Calculate damping and stiffness based on duration
@@ -81,9 +81,8 @@ export const CountUp = ({
           minimumFractionDigits: 0,
           maximumFractionDigits: 0,
         };
-
         const formattedNumber = Intl.NumberFormat("en-US", options).format(
-          latest.toFixed(0)
+          parseFloat(latest)
         );
 
         ref.current.textContent = separator

@@ -83,16 +83,16 @@ export const HistoryReview = () => {
   const handleTransactionUpdate = (updatedTransaction: Transaction) => {
     setTransactions(prevTransactions =>
       prevTransactions.map(transaction =>
-        transaction.transactionId === updatedTransaction.transactionId ? updatedTransaction : transaction
+        transaction.id === updatedTransaction.id ? updatedTransaction : transaction
       )
     )
     setModifiedTransactions(prev => {
-      const exists = prev.some(t => t.transactionId === updatedTransaction.transactionId)
+      const exists = prev.some(t => t.id === updatedTransaction.id)
       if (!exists) {
         return [...prev, updatedTransaction]
       }
       return prev.map(t =>
-        t.transactionId === updatedTransaction.transactionId ? updatedTransaction : t
+        t.id === updatedTransaction.id ? updatedTransaction : t
       )
     })
   }
@@ -151,7 +151,7 @@ export const HistoryReview = () => {
               </span>
               <div className="flex flex-col gap-6">
                 {transactions.map((transaction, index) => (
-                  <div key={transaction.transactionId}>
+                  <div key={transaction.id}>
                     <TransactionCard
                       data={transaction}
                       onTransactionUpdate={handleTransactionUpdate}

@@ -9,8 +9,7 @@ import { StrategyIcon } from '@/components/icons/strategy-icon';
 import { useRouter, usePathname } from 'next/navigation';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
-import { Transaction, TransactionCategory, transactionCategories } from '@/type/transaction';
-import { api } from '@/lib/axios';
+import { TransactionCategory, transactionCategories } from '@/type/transaction';
 
 type PageNames = "planning" | "goals" | "extract" | "profile"
 
