@@ -11,7 +11,7 @@ import ShinyText from "@/components/animated/shiny-text";
 export default function Planning() {
   return (
     <>
-      <Header />
+      <Header title="Meus objetivos" />
       <main className="pb-36 w-full flex flex-col gap-6 h-[calc(100vh-96px)] overflow-y-auto relative">
         <section className="flex flex-col items-center gap-[2px] sticky top-0 py-4">
           <p className="text-xs font-red-hat font-medium">
@@ -56,7 +56,7 @@ export default function Planning() {
               + Adicione um novo planejamento
             </Link>
 
-            <button className="p-1 flex items-center gap-1 bg-dark rounded hover:brightness-90 transition">
+            <button className="px-2 py-1 flex items-center gap-1 bg-dark rounded hover:brightness-90 transition">
               <Image src="/banana-prata-coin.svg" alt="Banana Prata" height={15} width={15} />
               <ShinyText text="Assinar" disabled={false} speed={3} className='text-[11px] font-rubik font-medium' />
             </button>

@@ -20,7 +20,7 @@ export const FinancialHistory = () => {
     const email = localStorage.getItem('email')
     const alreadyPersisted = localStorage.getItem(`financialDetails_${email}`)
     if (!alreadyPersisted) return
-    const onboardingId = JSON.parse(alreadyPersisted).onboardingId
+    const onboardingId = JSON.parse(alreadyPersisted).id
     try {
       const payload = {
         fileName: files[0].name,

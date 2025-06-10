@@ -67,7 +67,7 @@ export const HistoryReview = () => {
     try {
       setIsFetching(true)
       const json = await fetchFinancialDetails();
-      const fetchedCategorizeExtract = await fetchCategorizeExtract(json.data.onboardingId)
+      const fetchedCategorizeExtract = await fetchCategorizeExtract(json.data.id)
       if (fetchedCategorizeExtract.data.status === 'PROCESSED') {
         const fetchedTransactions = await fetchTransactions(json.data.userId)
         setTransactions(fetchedTransactions.data)
@@ -99,12 +99,11 @@ export const HistoryReview = () => {
 
   const handleSubmitTransactions = async () => {
     try {
-      const response = await fetch('http://localhost:3333/transactions', {
-        method: 'PATCH',
+      const response = await fetch(`http://localhost:3333/onboarding/${categorizeExtract?.onboardingId}/planning`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ transactions: modifiedTransactions }),
       })
 
       if (!response.ok) {

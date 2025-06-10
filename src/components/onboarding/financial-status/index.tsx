@@ -85,7 +85,7 @@ export const FinancialStatus = () => {
       effort: selectedOption,
       email,
     };
-    const onboardingId = JSON.parse(alreadyPersisted).onboardingId
+    const onboardingId = JSON.parse(alreadyPersisted).id
     try {
       const response = await fetch(`http://localhost:3333/onboarding/${onboardingId}`, {
         method: 'PATCH',

@@ -20,6 +20,7 @@ export default function Form() {
   const [currentStep, setCurrentStep] = useState<"email" | "name" | "code">("email")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
   const [code, setCode] = useState("")
   const router = useRouter();
 
@@ -42,7 +43,8 @@ export default function Form() {
     try {
       const response = await api.post("/users/auth/signup", {
         email,
-        name
+        name,
+        phoneNumber
       });
       setCurrentStep("code");
       return response.data;
@@ -121,6 +123,7 @@ export default function Form() {
                   Primeira vez por aqui?Como podemos te chamar?
                 </h1>
                 <Input label="Nome" labelBg="bg-[#F6F4F3]" type="text" value={name} onChange={e => setName(e.target.value)} />
+                <Input label="Celular" labelBg="bg-[#F6F4F3]" type="text" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} />
               </div>
             )
           }

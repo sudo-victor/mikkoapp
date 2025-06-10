@@ -14,7 +14,7 @@ type LayoutProps = {
   params: Promise<{ step: string }>;
 };
 
-export default async function PlanningLayout({ children }: LayoutProps) {
+export default async function ExtractLayout({ children }: LayoutProps) {
   return (
     <div className="w-screen h-screen bg-dashboardBg">
       <div className="mx-auto h-full w-full px-5 overflow-hidden flex flex-col">

@@ -10,16 +10,16 @@ type Props = {
 }
 
 const formatCurrency = (value: number, movementType: string) => {
+  const real = value / 100
   const formattedValue = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-  }).format(Math.abs(value));
+  }).format(Math.abs(real));
 
-  return movementType === 'withdraw' ? `-${formattedValue}` : `+${formattedValue}`;
+  return movementType === 'WITHDRAW' ? `-${formattedValue}` : `+${formattedValue}`;
 };
 
 export const TransactionCard = ({ data, onTransactionUpdate }: Props) => {
-  const movementType = data.type.includes('Receita') ? 'deposit' : 'withdraw'
 
   return (
     <article className="flex items-center justify-between gap-5">
@@ -38,11 +38,11 @@ export const TransactionCard = ({ data, onTransactionUpdate }: Props) => {
         <p className={clsx(
           "text-xs font-red-hat",
           {
-            "text-primary": movementType === 'withdraw',
-            "text-green-600": movementType === 'deposit',
+            "text-primary": data.type === 'WITHDRAW',
+            "text-green-600": data.type === 'DEPOSIT',
           }
         )}>
-          {formatCurrency(data.value, movementType)}
+          {formatCurrency(data.value, data.type)}
         </p>
 
         <TransactionEditorDrawer

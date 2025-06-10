@@ -30,7 +30,7 @@ export const Input: React.FC<Props> = ({
       </label>
       <input
         className={clsx(
-          "relative w-full z-20 text-dark font-red-hat text-xs md:text-sm bg-transparent outline-none",
+          "relative w-full z-20 text-dark font-red-hat text-base md:text-sm bg-transparent outline-none",
           className
         )}
         onFocus={() => setIsFocused(true)}
